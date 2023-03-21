@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for product in products %}
+    <div class="make_center"><center>
+    <img src="{{product.image.url}}" height="200px" width="200px" alt="{{product.name}}"><br>
+    <h2>{{product.name}}</h2>
+    <p>Bid Amount : ${{product.geeks_field.bid_amount}}</p>
+    <a href="product/{{product.id}}" >More</a></center>
+    <hr>
+</div>
+    {% endfor %}
+{% endblock %}

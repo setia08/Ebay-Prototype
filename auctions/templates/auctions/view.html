@@ -1,0 +1,65 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if bid_message %}
+    {% if updated %}
+        {{message}}
+    {% else %}
+        {{message}}
+    {% endif %}
+{% endif %}
+{% if isOwner and product.isActive %}
+<form action="{% url 'close_bid' id=product.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="close_bid">
+</form>
+{% endif %}
+{% if not product.isActive  and user == product.price.user  %}
+<h1>Closed You won</h1>
+{% endif %}
+{{isOwner}}
+<h1>{{message}}</h1>
+{{product_details.image}}
+{{product.id}}
+{{product.name}}
+{{product.category}}
+<h1>{{product.image.url}}</h1>
+<img src="{{product.image.url}}" height="100px" width="100px" alt="{{product.name}}">
+<h6>{{product.caption}}</h6>
+<br>
+BID AMOUNT: {{current_bid}}
+<br>
+<form action="{% url 'place_bid' id=product.id %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="bid" min="0" placeholder="Place bid">
+    <input type="submit" value="Place bid">
+</form>
+{{bid_message}}
+<br>
+{% if ListinginwatchList %}
+<form action="{% url 'removefromwatchList' id=product.id %}" method="post">
+    {% csrf_token %}
+    <button>Remove watchList</button>
+</form>
+{% else %}
+
+<form action="{% url 'addtowatchList' id=product.id %}" method="post">
+    {% csrf_token %}
+    <button>Add to watchList</button>
+</form>
+
+{% endif %}
+{% if user.is_authenticated %}
+
+<form action="{% url 'add_comment' id=product.id %}" method="POST">
+    {% csrf_token %}
+    <h6>Add comment</h6>
+    <input type="text" name="newcomment" placeholder="Add Comment">
+    <input type="submit" value="Add comment">
+</form> 
+{% endif %}
+<hr>
+{% for comment in allcomments %}
+{{comment.message}}
+{% endfor %}
+{% endblock %}

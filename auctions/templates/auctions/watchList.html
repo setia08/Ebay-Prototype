@@ -1,0 +1,9 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>My WatchList</h2>
+   {% for watchlist_list in watchlist_lists %}
+   {{watchlist_list.name}}
+   <a href="/product/{{watchlist_list.id}}" >More</a>
+   {% endfor %}
+{% endblock %}

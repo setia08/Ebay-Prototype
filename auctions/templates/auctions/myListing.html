@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>My Listings</h2>
+
+    {% for product in products %}
+    <center>
+<h5>{{product.name}}</h5>
+    <img src="{{product.image.url}}" alt="{{product.name}}" width="200px" height="200px">
+    <hr></center>
+    {% endfor %}
+{% endblock %}

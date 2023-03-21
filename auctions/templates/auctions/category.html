@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>My Category</h2>
+    
+    
+    {% for product in products %}
+    {{products.length}} 
+    {% if  0 %}
+    <h1>No specific Results</h1>
+    {% else %}
+    <div class="make_center"><center>
+    <h4>{{product.name}}</h4>
+    <img src="{{product.image.url}}" alt="{{product.name}}" height="200px" width="200px"><br>
+    <a href="/product/{{product.id}}" >More</a></center>
+    <hr></div>{% endif %}
+    {% endfor %}
+{% endblock %}
